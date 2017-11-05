@@ -1,0 +1,132 @@
+{
+  "languageModel": {
+    "types": [
+      {
+        "name": "YesNo",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "Yes",
+              "synonyms": [
+                "yeah",
+                "yay",
+                "ye",
+                "sure",
+                "okay"
+              ]
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "No",
+              "synonyms": [
+                "nope",
+                "nah"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "SocialBotIntent",
+        "samples": [
+          "My name is {Name}",
+          "I am {Name}"
+        ],
+        "slots": [
+          {
+            "name": "Name",
+            "type": "AMAZON.US_FIRST_NAME"
+          },
+          {
+            "name": "Activity",
+            "type": "AMAZON.Sport",
+            "samples": [
+              "{Activity}"
+            ]
+          },
+          {
+            "name": "CurrentMinutes",
+            "type": "AMAZON.NUMBER",
+            "samples": [
+              "{CurrentMinutes}"
+            ]
+          }
+        ]
+      }
+    ],
+    "invocationName": "andra"
+  },
+  "prompts": [
+    {
+      "id": "Elicit.Intent-SocialBotIntent.IntentSlot-Activity",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Hi {Name}. I'd like to work with you to help you maintain a healthy level of physical activity. What activity would you like to do more over the next week?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-SocialBotIntent.IntentSlot-CurrentMinutes",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "How many minutes did you spend {Activity} last week?"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "intents": [
+      {
+        "name": "SocialBotIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "Name",
+            "type": "AMAZON.US_FIRST_NAME",
+            "elicitationRequired": false,
+            "confirmationRequired": false,
+            "prompts": {}
+          },
+          {
+            "name": "Activity",
+            "type": "AMAZON.Sport",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicitation": "Elicit.Intent-SocialBotIntent.IntentSlot-Activity"
+            }
+          },
+          {
+            "name": "CurrentMinutes",
+            "type": "AMAZON.NUMBER",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicitation": "Elicit.Intent-SocialBotIntent.IntentSlot-CurrentMinutes"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
